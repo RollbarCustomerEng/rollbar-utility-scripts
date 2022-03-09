@@ -12,7 +12,7 @@ import requests
 # _______________________________________________________________
 account_read_token = 'TOKEN'
 
-# Create RQL Job based on the query above
+# Execute API request and extract users from list
 # _______________________________________________________________
 def main():
     url = 'https://api.rollbar.com/api/1/users'
@@ -20,12 +20,13 @@ def main():
     headers = {
         'X-Rollbar-Access-Token': account_read_token
     }
-    # Doing the API call to get the list of Users
+    # Make the API call to get the list of Users
     response = requests.request('GET', url, headers = headers)
 
     response_data = response.json()
     user_list_file = open('user-list.txt', 'w')
 
+    # Loop through the list of users and write their contents to the console and to a .txt file
     for i in response_data['result']['users']:
         print(i)
         user_list_file.write(str(i) + "\n")
