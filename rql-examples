@@ -1,0 +1,22 @@
+# Show number of unique versions deployed per week for each project
+select project_slug, timestamp div (86400*7), count_distinct(revision) from deploy
+where environment like "%prod%"
+group by 1, 2
+
+# List users by average and maximum session length.
+SELECT person, environment, max(client.runtime_ms), avg(client.runtime_ms)
+FROM item_occurrence
+GROUP BY 1, 2
+ORDER BY 3 DESC
+
+# List active date ranges for each version.
+SELECT code_version, min(timestamp), max(timestamp)
+FROM item_occurrence
+GROUP BY 1
+
+# List top 100 user agent strings over last week
+SELECT browser, count(*)
+FROM item_occurrence
+WHERE timestamp > unix_timestamp() - 60 * 60 * 24 * 7
+GROUP BY 1
+ORDER BY 2 DESC
