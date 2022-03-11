@@ -52,6 +52,8 @@ def get_occurrence_batch(project_read_token, item_id, last_id):
 def process_occurrences(occ_list):
 
     # Add your custom processing of returned occurrences here
+
+    # No more occurrences left to process
     if len(occ_list) == 0:
         print('No occurrences in the list')
 
@@ -75,6 +77,7 @@ def get_all(read_token, counter):
     # Need to add 1 so that we dont miss the most recent occurrence
     last_occ = last_occ + 1
 
+    # Get occurrences in batches of 20
     while last_occ >= first_occ:
         last_occ = get_occurrence_batch(read_token, item_id, last_occ)
 
