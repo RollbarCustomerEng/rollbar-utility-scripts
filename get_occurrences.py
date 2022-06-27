@@ -55,7 +55,7 @@ def process_occurrences(occ_list):
 
     # No more occurrences left to process
     if len(occ_list) == 0:
-        print('No occurrences in the list')
+        print('No more occurrences in the list')
 
     for occ in occ_list:
         print_error_details(occ)
@@ -70,16 +70,24 @@ def print_error_details(occ):
         and  'message' in occ['data']['body']['trace']['exception']:
         print(occ['data']['body']['trace']['exception']['message'])
 
+
 def get_all(read_token, counter):
 
     item_id, last_occ, first_occ = get_item_id(read_token, counter)
+    print_item_occurrences(read_token, item_id, first_occ, last_occ)
+
+
+def print_item_occurrences(read_token, item_id, first_occurrence_id, last_occurrence_id):
+    #
+    # Get all the occurrences between a lower occurrence id (first) and 
+    # an upper occurrence id (last/mpst recent)
 
     # Need to add 1 so that we dont miss the most recent occurrence
-    last_occ = last_occ + 1
+    last_occurrence_id = last_occurrence_id + 1
 
     # Get occurrences in batches of 20
-    while last_occ >= first_occ:
-        last_occ = get_occurrence_batch(read_token, item_id, last_occ)
+    while last_occurrence_id >= first_occurrence_id:
+        last_occurrence_id = get_occurrence_batch(read_token, item_id, last_occurrence_id)
 
 
 
