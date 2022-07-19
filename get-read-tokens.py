@@ -1,5 +1,5 @@
 # _______________________________________________________________
-# Get list of users with email, ID, and username
+# Get list of project access tokens with "read" scope
 # _______________________________________________________________
 
 # _______________________________________________________________
@@ -35,6 +35,7 @@ def main():
         response = requests.request('GET', endpoint, headers=headers)
         response_json = response.json()
         for t in response_json['result']:
+            # change this from "read" to another value to get different tokens
             if t['name'] == "read":
                 project_list_file.write(str(id) + ',' + str(t['access_token']) + "\n")
 
