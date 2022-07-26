@@ -12,7 +12,6 @@ import requests
 # _______________________________________________________________
 account_read_token = 'TOKEN'
 
-# Create RQL Job based on the query above
 # _______________________________________________________________
 def main():
     projects_endpoint = 'https://api.rollbar.com/api/1/projects'
